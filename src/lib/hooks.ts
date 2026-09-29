@@ -1,21 +1,25 @@
+import { animate, useInView, useReducedMotion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Lang } from '../content'
+import { EASE_OUT_EXPO } from './motion'
 
-const prefersReduced = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+export const THEMES = { LIGHT: 'light', DARK: 'dark' } as const
+export type Theme = (typeof THEMES)[keyof typeof THEMES]
+
+const LANG_STORAGE_KEY = 'scl_lang'
+const THEME_STORAGE_KEY = 'scl_theme'
 
 export function useLang(): [Lang, (l: Lang) => void] {
   const [lang, set] = useState<Lang>(() => {
     try {
-      const v = localStorage.getItem('scl_lang')
+      const v = localStorage.getItem(LANG_STORAGE_KEY)
       if (v === 'FR' || v === 'EN') return v
     } catch { /* storage blocked */ }
     // French-speaking browsers land on the French version by default.
     return navigator.language?.toLowerCase().startsWith('fr') ? 'FR' : 'EN'
   })
   const setLang = useCallback((l: Lang) => {
-    try { localStorage.setItem('scl_lang', l) } catch { /* storage blocked */ }
+    try { localStorage.setItem(LANG_STORAGE_KEY, l) } catch { /* storage blocked */ }
     set(l)
   }, [])
   useEffect(() => {
@@ -24,42 +28,20 @@ export function useLang(): [Lang, (l: Lang) => void] {
   return [lang, setLang]
 }
 
-export function useTheme(): ['light' | 'dark', () => void] {
-  const [theme, set] = useState<'light' | 'dark'>(() => {
+export function useTheme(): [Theme, () => void] {
+  const [theme, set] = useState<Theme>(() => {
     try {
-      const v = localStorage.getItem('scl_theme')
-      if (v === 'dark' || v === 'light') return v
+      const v = localStorage.getItem(THEME_STORAGE_KEY)
+      if (v === THEMES.DARK || v === THEMES.LIGHT) return v
     } catch { /* storage blocked */ }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? THEMES.DARK : THEMES.LIGHT
   })
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    try { localStorage.setItem('scl_theme', theme) } catch { /* storage blocked */ }
+    try { localStorage.setItem(THEME_STORAGE_KEY, theme) } catch { /* storage blocked */ }
   }, [theme])
-  const toggle = useCallback(() => set(t => (t === 'dark' ? 'light' : 'dark')), [])
+  const toggle = useCallback(() => set(t => (t === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)), [])
   return [theme, toggle]
-}
-
-/** Adds `.in` once the element scrolls into view. */
-export function useReveal<T extends HTMLElement = HTMLDivElement>() {
-  const ref = useRef<T | null>(null)
-  const [shown, setShown] = useState(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    if (prefersReduced()) { setShown(true); return }
-    const obs = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { setShown(true); obs.disconnect() }
-        })
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-  return { ref, shown, className: `reveal${shown ? ' in' : ''}` }
 }
 
 /** Tracks which section id is currently in the viewport. */
@@ -82,30 +64,15 @@ export function useScrollSpy(ids: string[]) {
 }
 
 /** Animates 0 → 1 once visible; drives chart mark growth. */
-export function useChartReveal(duration = 900) {
+export function useChartReveal(durationSeconds = 0.9) {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [p, setP] = useState(0)
-  const started = useRef(false)
+  const inView = useInView(ref, { once: true, amount: 0.25 })
+  const prefersReducedMotion = useReducedMotion()
+  const [progress, setProgress] = useState(0)
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    if (prefersReduced()) { setP(1); return }
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting || started.current) return
-        started.current = true
-        obs.disconnect()
-        const t0 = performance.now()
-        const step = (t: number) => {
-          const q = Math.min(1, (t - t0) / duration)
-          setP(1 - Math.pow(1 - q, 3))
-          if (q < 1) requestAnimationFrame(step)
-        }
-        requestAnimationFrame(step)
-      })
-    }, { threshold: 0.25 })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [duration])
-  return { ref, p }
+    if (!inView || prefersReducedMotion) return
+    const controls = animate(0, 1, { duration: durationSeconds, ease: EASE_OUT_EXPO, onUpdate: setProgress })
+    return () => controls.stop()
+  }, [inView, prefersReducedMotion, durationSeconds])
+  return { ref, p: prefersReducedMotion ? 1 : progress }
 }

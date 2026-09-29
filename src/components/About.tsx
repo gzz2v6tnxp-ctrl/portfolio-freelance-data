@@ -1,32 +1,31 @@
 import type { Dict } from '../content'
 import { CERT_META } from '../content'
-import { useReveal } from '../lib/hooks'
+import { Reveal, RevealItem } from './motion/Reveal'
 
 export default function About({ d }: { d: Dict }) {
-  const r = useReveal()
   return (
     <section id="about">
-      <div ref={r.ref} className={`shell about-grid ${r.className}`}>
-        <div className="about-text">
+      <Reveal className="shell about-grid" stagger>
+        <RevealItem className="about-text">
           <div className="eyebrow" style={{ marginBottom: 18 }}>{d.s4k}</div>
           <p className="lead">{d.about_lead}</p>
           <div className="body">
             <p>{d.about_p1}</p>
             <p>{d.about_p2}</p>
           </div>
-        </div>
+        </RevealItem>
 
         <aside className="about-aside">
-          <div className="facts">
+          <RevealItem className="facts">
             {d.facts.map(f => (
               <div className="row" key={f.k}>
                 <div className="k">{f.k}</div>
                 <div className="v">{f.v}{f.sub && <small>{f.sub}</small>}</div>
               </div>
             ))}
-          </div>
+          </RevealItem>
 
-          <div className="certs">
+          <RevealItem className="certs">
             <div className="eyebrow" style={{ marginBottom: 14 }}>{d.certs_label}</div>
             {d.certs.map((c, i) => (
               <div className="cert" key={c.title}>
@@ -38,9 +37,9 @@ export default function About({ d }: { d: Dict }) {
                 <a className="link" href={CERT_META[i].href} target="_blank" rel="noopener">{d.cert_view} ↗</a>
               </div>
             ))}
-          </div>
+          </RevealItem>
         </aside>
-      </div>
+      </Reveal>
     </section>
   )
 }

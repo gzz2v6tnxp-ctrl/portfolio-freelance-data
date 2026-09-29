@@ -1,27 +1,22 @@
 import type { Dict } from '../content'
 import { LINKS } from '../content'
-import { useReveal } from '../lib/hooks'
 import { RagDiagram, ScribeDiagram } from './Diagrams'
+import { Reveal, RevealItem } from './motion/Reveal'
 
 const TAGS1 = ['Qdrant', 'BM25', 'Embeddings multimodaux', 'Gemini', 'CoVe', 'Docker']
 const TAGS2 = ['Llama 3', 'PEFT', 'Transformers', 'Airflow', 'ROUGE-L', 'BERTScore']
 
 export default function Work({ d }: { d: Dict }) {
-  const head = useReveal()
-  const f1 = useReveal<HTMLElement>()
-  const f2 = useReveal<HTMLElement>()
-  const more = useReveal()
-
   return (
     <section id="work">
       <div className="shell">
-        <div ref={head.ref} className={`section-head ${head.className}`}>
+        <Reveal className="section-head">
           <div className="eyebrow">{d.s1k}</div>
           <h2>{d.s1t}</h2>
           <p>{d.s1n}</p>
-        </div>
+        </Reveal>
 
-        <article ref={f1.ref} className={`feature ${f1.className}`}>
+        <Reveal as="article" className="feature">
           <div className="txt">
             <div className="eyebrow"><span className="accent">{d.st_prod}</span> · Malitix</div>
             <h3>{d.f1_title}</h3>
@@ -38,9 +33,9 @@ export default function Work({ d }: { d: Dict }) {
             </div>
           </div>
           <div className="fig-area"><RagDiagram t={d.d1} /></div>
-        </article>
+        </Reveal>
 
-        <article ref={f2.ref} className={`feature rev ${f2.className}`}>
+        <Reveal as="article" className="feature rev">
           <div className="txt">
             <div className="eyebrow">{d.st_ft}</div>
             <h3>{d.f2_title}</h3>
@@ -58,24 +53,24 @@ export default function Work({ d }: { d: Dict }) {
             </div>
           </div>
           <div className="fig-area"><ScribeDiagram t={d.d2} /></div>
-        </article>
+        </Reveal>
 
-        <div ref={more.ref} className={more.className}>
+        <Reveal stagger>
           <div className="tiles">
             {d.projects.map(p => (
-              <article className="tile" key={p.title}>
+              <RevealItem as="article" className="tile" key={p.title} whileHover={{ y: -4 }}>
                 <div className="org">{p.org}</div>
                 <h4>{p.title}</h4>
                 <p>{p.desc}</p>
                 <div className="m">{p.metric}</div>
-              </article>
+              </RevealItem>
             ))}
           </div>
-          <div className="also">
+          <RevealItem className="also">
             <span className="eyebrow">{d.also_label}</span>
             {d.also.map(a => <span key={a}>{a}</span>)}
-          </div>
-        </div>
+          </RevealItem>
+        </Reveal>
       </div>
     </section>
   )

@@ -1,15 +1,19 @@
+import { motion } from 'framer-motion'
 import type { Dict, Lang } from '../content'
 import { NAME } from '../content'
-import { useScrollSpy } from '../lib/hooks'
+import { THEMES, useScrollSpy } from '../lib/hooks'
+import type { Theme } from '../lib/hooks'
+import { SPRING_SNAPPY } from '../lib/motion'
+import LanguageSwitch from './LanguageSwitch'
+import ThemeToggle from './ThemeToggle'
 
 const SECTIONS = ['work', 'experience', 'capabilities', 'about', 'contact']
-const LANGS: Lang[] = ['FR', 'EN']
 
 interface Props {
   d: Dict
   lang: Lang
   setLang: (l: Lang) => void
-  theme: 'light' | 'dark'
+  theme: Theme
   toggleTheme: () => void
 }
 
@@ -24,7 +28,12 @@ export default function Header({ d, lang, setLang, theme, toggleTheme }: Props) 
   ] as const
 
   return (
-    <header className="header">
+    <motion.header
+      className="header"
+      initial={{ y: -16, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="shell header-inner">
         <a className="brand" href="#top">{NAME}</a>
 
@@ -32,30 +41,22 @@ export default function Header({ d, lang, setLang, theme, toggleTheme }: Props) 
           {items.map(([id, label]) => (
             <a key={id} href={`#${id}`} className={active === id ? 'on' : undefined}>
               {label}
+              {active === id && (
+                <motion.span className="nav-indicator" layoutId="nav-indicator" transition={SPRING_SNAPPY} />
+              )}
             </a>
           ))}
         </nav>
 
         <div className="tools">
-          <div className="lang" aria-label="Langue / Language">
-            {LANGS.map(l => (
-              <button
-                key={l}
-                type="button"
-                className={lang === l ? 'on' : undefined}
-                onClick={() => setLang(l)}
-                aria-pressed={lang === l}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
-          {/* The label names the theme the click switches to. */}
-          <button type="button" className="theme-btn" onClick={toggleTheme} aria-label="Clair / sombre">
-            {theme === 'dark' ? d.theme_light : d.theme_dark}
-          </button>
+          <LanguageSwitch lang={lang} onChange={setLang} />
+          <ThemeToggle
+            theme={theme}
+            onToggle={toggleTheme}
+            label={theme === THEMES.DARK ? d.theme_light : d.theme_dark}
+          />
         </div>
       </div>
-    </header>
+    </motion.header>
   )
 }

@@ -19,7 +19,10 @@ npm run preview  # sert le build de production
 |---|---|
 | `src/content.ts` | Tout le contenu bilingue (FR / EN), le nom, les liens, la géométrie de la frise et les chiffres des graphes |
 | `src/styles.css` | Design system : tokens de couleur, thèmes clair/sombre, grille, typographie |
-| `src/lib/hooks.ts` | Langue, thème, reveal au scroll, scrollspy, animation des graphes |
+| `src/lib/hooks.ts` | Langue, thème, scrollspy, animation des graphes |
+| `src/lib/motion.ts` | Variants, easings et transitions Framer Motion partagés |
+| `src/components/motion/Reveal.tsx` | `Reveal` / `RevealItem` : apparition au scroll (simple ou en cascade) via Framer Motion |
+| `src/components/ThemeToggle.tsx`, `LanguageSwitch.tsx`, `icons.tsx` | Bouton icône soleil / lune, sélecteur de langue à pastille glissante, icônes SVG |
 | `src/components/Charts.tsx` | Primitives de graphes SVG (barres de qualité, frise du parcours) |
 | `src/components/Diagrams.tsx` | Schémas d'architecture des deux projets phares (pipeline RAG, pipeline SOAP) |
 | `src/components/` | Une section par fichier (Header, Hero, Signals, Work, Experience, Capabilities, About, Footer) |
@@ -45,4 +48,11 @@ contrôles du skill `dataviz` sur les deux surfaces (`#f4f4f1` et `#131210`).
 Modifier ces valeurs ou les fonds impose de revalider la palette.
 
 Chaque graphe expose un tableau de données dépliable et une infobulle au survol.
-Le mouvement est désactivé sous `prefers-reduced-motion`.
+
+## Animations
+
+Les transitions passent par **Framer Motion** : entrée du hero en cascade,
+apparition des sections au scroll (`Reveal`), soulignement de navigation et
+pastille de langue partagés (`layoutId`), rotation soleil / lune du thème,
+fondu du contenu au changement de langue. `MotionConfig reducedMotion="user"`
+désactive le mouvement sous `prefers-reduced-motion`.
