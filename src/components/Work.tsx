@@ -1,0 +1,82 @@
+import type { Dict } from '../content'
+import { LINKS } from '../content'
+import { useReveal } from '../lib/hooks'
+import { RagDiagram, ScribeDiagram } from './Diagrams'
+
+const TAGS1 = ['Qdrant', 'BM25', 'Embeddings multimodaux', 'Gemini', 'CoVe', 'Docker']
+const TAGS2 = ['Llama 3', 'PEFT', 'Transformers', 'Airflow', 'ROUGE-L', 'BERTScore']
+
+export default function Work({ d }: { d: Dict }) {
+  const head = useReveal()
+  const f1 = useReveal<HTMLElement>()
+  const f2 = useReveal<HTMLElement>()
+  const more = useReveal()
+
+  return (
+    <section id="work">
+      <div className="shell">
+        <div ref={head.ref} className={`section-head ${head.className}`}>
+          <div className="eyebrow">{d.s1k}</div>
+          <h2>{d.s1t}</h2>
+          <p>{d.s1n}</p>
+        </div>
+
+        <article ref={f1.ref} className={`feature ${f1.className}`}>
+          <div className="txt">
+            <div className="eyebrow"><span className="accent">{d.st_prod}</span> · Malitix</div>
+            <h3>{d.f1_title}</h3>
+            <p className="desc">{d.f1_desc}</p>
+            <div className="metrics">
+              <div><b>~100<small>/j</small></b><span>{d.f1_lbl_conv}</span></div>
+              <div><b>800+</b><span>{d.f1_lbl_prod}</span></div>
+              <div><b>80 %</b><span>{d.f1_lbl_rel}</span></div>
+              <div><b>2 sem.</b><span>{d.f1_lbl_mvp}</span></div>
+            </div>
+            <div className="tags">{TAGS1.map(t => <span key={t}>{t}</span>)}</div>
+            <div className="links">
+              <a className="link" href={LINKS.ragRepo} target="_blank" rel="noopener">{d.link_code} ↗</a>
+            </div>
+          </div>
+          <div className="fig-area"><RagDiagram t={d.d1} /></div>
+        </article>
+
+        <article ref={f2.ref} className={`feature rev ${f2.className}`}>
+          <div className="txt">
+            <div className="eyebrow">{d.st_ft}</div>
+            <h3>{d.f2_title}</h3>
+            <p className="desc">{d.f2_desc}</p>
+            <div className="metrics">
+              <div><b>8B</b><span>Llama 3</span></div>
+              <div><b>LoRA</b><span>QLoRA / PEFT</span></div>
+              <div><b>SOAP</b><span>{d.f2_lbl_struct}</span></div>
+              <div><b>PII</b><span>{d.f2_lbl_anon}</span></div>
+            </div>
+            <div className="tags">{TAGS2.map(t => <span key={t}>{t}</span>)}</div>
+            <div className="links">
+              <a className="link" href={LINKS.scribeRepo} target="_blank" rel="noopener">{d.link_code} ↗</a>
+              <a className="link" href={LINKS.scribeModel} target="_blank" rel="noopener">{d.link_model} ↗</a>
+            </div>
+          </div>
+          <div className="fig-area"><ScribeDiagram t={d.d2} /></div>
+        </article>
+
+        <div ref={more.ref} className={more.className}>
+          <div className="tiles">
+            {d.projects.map(p => (
+              <article className="tile" key={p.title}>
+                <div className="org">{p.org}</div>
+                <h4>{p.title}</h4>
+                <p>{p.desc}</p>
+                <div className="m">{p.metric}</div>
+              </article>
+            ))}
+          </div>
+          <div className="also">
+            <span className="eyebrow">{d.also_label}</span>
+            {d.also.map(a => <span key={a}>{a}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
