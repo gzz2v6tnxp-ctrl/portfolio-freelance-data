@@ -25,7 +25,7 @@ npm run preview  # sert le build de production
 | `src/components/` | Une section par fichier (Header, Hero, Signals, Work, Experience, Capabilities, About, Footer) |
 | `public/assets/` | Portrait et polices auto-hébergées (Archivo, Newsreader, JetBrains Mono) |
 | `public/fonts.css` | Déclarations `@font-face` |
-| `public/*.pdf` | CV anglais (`Sitraka_Ravelojaona_CV.pdf`) et français (`Sitraka_Ravelojaona_CV_FR.pdf`), servis selon la langue |
+| `public/Sitraka_Ravelojaona_CV_FR.pdf` | CV téléchargeable (français, servi pour les deux langues ; le chemin par langue est dans `LINKS.cv`) |
 
 ## Mettre à jour le contenu
 

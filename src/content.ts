@@ -269,8 +269,8 @@ export const LINKS = {
   scribeModel: 'https://huggingface.co/Irina-Igmm/clinical-scribe-llama-3-merged',
   email: 'irinasitraka67@gmail.com',
   phone: '+261 34 52 128 18',
-  // The French CV is the most recent; EN still points to the English one.
-  cv: { EN: '/Sitraka_Ravelojaona_CV.pdf', FR: '/Sitraka_Ravelojaona_CV_FR.pdf' } satisfies Record<Lang, string>,
+  // One French CV for both languages until an English version exists.
+  cv: { EN: '/Sitraka_Ravelojaona_CV_FR.pdf', FR: '/Sitraka_Ravelojaona_CV_FR.pdf' } satisfies Record<Lang, string>,
 }
 
 export const IMG = {
