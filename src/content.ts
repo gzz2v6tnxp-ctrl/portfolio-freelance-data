@@ -117,14 +117,14 @@ export const DICT: Record<Lang, Dict> = {
       { org: 'Malitix', title: 'Document intelligence', desc: 'OCR (Doctr) + LLM extraction, per-field confidence scoring, LLM-as-Judge validation.', metric: '95% · ~100 docs/day' },
       { org: 'Malitix', title: 'Computer vision', desc: 'Stamp and signature detection (YOLO), age classification (ResNet), augmented dataset.', metric: '100K → 500K images' },
     ],
-    also_label: 'Also', also: ['Bank-statement anomaly detection · ~200/day', 'Sports-coaching RAG chatbot', 'XGBoost credit scoring', 'Local LLM benchmarking'],
+    also_label: 'Also', also: ['Bank-statement anomaly detection · ~200/day', 'Sports-coaching RAG chatbot', 'XGBoost credit scoring', 'Cloud ML pipelines · Vertex AI, SageMaker', 'Local LLM benchmarking'],
     s2k: 'Experience', s2t: "Where I've shipped.", exp_now: 'Current role',
     exp: [
       { period: 'Apr 2026 – today', role: 'AI Engineer, Multi-Agent & RAG', org: 'Matsiya', place: 'France', points: ['Audited and refactored 5 RAG services (~10,700 lines): inconsistencies, dead code, harmonized patterns.', 'Designed the KnowledgeSource v2 architecture for the platform’s agent-builder.', '898 green tests on the agentic scope.'] },
       { period: 'Jul – Sep 2026', role: 'AI Engineer, Document AI', org: 'Blackcell · via Alvarez & Marsal', place: 'France', points: ['Selected from 90 candidates to design a Document AI pipeline (OCR + LLM) on legal and financial documents.', 'Big data on public open data: cross-referenced Bodacc and RNE records to feed INPI KPIs (560 to 400K companies).', 'Bulk-optimized HTTP requests: −70% volume.'] },
       { period: 'Mar 2024 – Apr 2026', role: 'AI Engineer, GenAI, RAG & Computer Vision', org: 'Malitix', place: 'Antananarivo', points: ['Multi-agent system (C7) orchestrating AI tasks in production.', 'Multimodal sales assistant: hybrid RAG on Qdrant, 80% relevance, MVP in 2 weeks.', 'Document AI ~100 docs/day at 95%; vision (YOLO, ResNet); bank anomalies on Dataflow.', 'MLOps: Langfuse, Arize Phoenix, n8n.'] },
       { period: 'Jul 2023 – Feb 2024', role: 'Data Scientist', org: 'Relia Consulting', place: 'Antananarivo', points: ['Accounting chatbot with Rasa: training data, conversational flows, end-to-end tests.', 'Stock prediction (linear regression, Adam), tracked in Weights & Biases.'] },
-      { period: '2021 – today', role: 'Freelance, Developer & Data Analyst (healthcare)', org: 'Independent engagements', place: 'International', points: ['Sports-coaching RAG chatbot: Pinecone + Groq, Botpress, automated CRM.', 'KPI dashboard (Power BI) and optimization algorithm for a health-insurance brokerage.', 'Back-end and PostgreSQL for a government project (Mauritius), CNAPS modules.'] },
+      { period: '2021 – 2023', role: 'Freelance, Data & AI', org: 'Independent engagements', place: 'International', points: ['Sports-coaching RAG chatbot: Pinecone + Groq, Botpress, automated CRM.', 'KPI dashboard (Power BI) and optimization algorithm for a health-insurance brokerage.', 'Back-end and PostgreSQL for a government project (Mauritius), CNAPS modules.', 'MIS’AINA dashboard: data visualization for tracking development projects.'] },
     ],
     s3k: 'Stack', s3t: 'Capabilities, indexed.',
     stack: [
@@ -142,7 +142,7 @@ export const DICT: Record<Lang, Dict> = {
     about_p2: 'I currently work with French teams, Matsiya and Blackcell through Alvarez & Marsal, who selected me from 90 candidates for a strategic Document AI project. Next step: relocating to join a team on site, closer to the product and the people using it.',
     facts: [
       { k: 'Education', v: 'Computer Science Engineering degree', sub: 'École Nationale d’Informatique, Univ. of Fianarantsoa · 2018–2023 · GPA 3.2/4' },
-      { k: 'Specializations', v: 'Machine Learning, Deep Learning, Statistical Learning, data modeling, programming' },
+      { k: 'Specializations', v: 'Machine Learning, Deep Learning, Statistical Learning, data modeling' },
       { k: 'Mobility', v: 'Open to international mobility', sub: 'Visa sponsorship required' },
       { k: 'Clients', v: 'Matsiya · Blackcell (Alvarez & Marsal)' },
       { k: 'Languages', v: 'French fluent · English professional' },
@@ -199,14 +199,14 @@ export const DICT: Record<Lang, Dict> = {
       { org: 'Malitix', title: 'Intelligence documentaire', desc: 'Extraction OCR (Doctr) + LLM, score de confiance par champ, validation LLM-as-Judge.', metric: '95 % · ~100 docs/jour' },
       { org: 'Malitix', title: 'Vision par ordinateur', desc: "Détection de cachets et signatures (YOLO), classification d'âge (ResNet), dataset augmenté.", metric: '100K → 500K images' },
     ],
-    also_label: 'Aussi', also: ["Détection d'anomalies bancaires · ~200 relevés/jour", 'Chatbot RAG coaching sportif', 'Credit scoring XGBoost', 'Benchmarking LLM local'],
+    also_label: 'Aussi', also: ["Détection d'anomalies bancaires · ~200 relevés/jour", 'Chatbot RAG coaching sportif', 'Credit scoring XGBoost', 'Pipelines ML Cloud · Vertex AI, SageMaker', 'Benchmarking LLM local'],
     s2k: 'Parcours', s2t: "Là où j'ai livré.", exp_now: 'Poste actuel',
     exp: [
       { period: "Avr. 2026 – aujourd'hui", role: 'AI Engineer, Multi-Agent & RAG', org: 'Matsiya', place: 'France', points: ['Audit et refactoring de 5 services RAG (~10 700 lignes) : incohérences, code mort, harmonisation des patterns.', "Conception de l'architecture KnowledgeSource v2 pour l'agent-builder de la plateforme.", '898 tests verts sur le scope agentique.'] },
       { period: 'Juil. – sept. 2026', role: 'AI Engineer, Document AI', org: 'Blackcell · mission via Alvarez & Marsal', place: 'France', points: ['Sélectionnée parmi 90 candidats pour concevoir un pipeline Document AI (OCR + LLM) sur documents juridiques et financiers.', 'Big data sur open data publique : croisement des données Bodacc et RNE pour alimenter des KPIs INPI (560 à 400K sociétés).', 'Optimisation bulk des requêtes HTTP : −70 % de volume.'] },
       { period: 'Mars 2024 – avr. 2026', role: 'AI Engineer, GenAI, RAG & Computer Vision', org: 'Malitix', place: 'Antananarivo', points: ["Système multi-agents (C7) pour l'orchestration de tâches IA en production.", 'Assistant de vente multimodal : RAG hybride sur Qdrant, 80 % de pertinence, MVP en 2 semaines.', 'Document AI ~100 docs/jour à 95 % ; vision (YOLO, ResNet) ; anomalies bancaires sur Dataflow.', 'MLOps : Langfuse, Arize Phoenix, n8n.'] },
       { period: 'Juil. 2023 – fév. 2024', role: 'Data Scientist', org: 'Relia Consulting', place: 'Antananarivo', points: ["Chatbot comptable via Rasa : données d'entraînement, flows conversationnels, tests end-to-end.", 'Prédiction de stock (régression linéaire, Adam), suivi Weights & Biases.'] },
-      { period: "2021 – aujourd'hui", role: 'Freelance, Dev & Analyste Data (domaine santé)', org: 'Missions indépendantes', place: 'International', points: ['Chatbot RAG coaching sportif : Pinecone + Groq, Botpress, CRM automatisé.', "Dashboard KPIs (Power BI) et algorithme d'optimisation pour le courtage santé.", 'Back-end et PostgreSQL pour un projet ministériel (Maurice), modules CNAPS.'] },
+      { period: '2021 – 2023', role: 'Freelance, Data & IA', org: 'Missions indépendantes', place: 'International', points: ['Chatbot RAG coaching sportif : Pinecone + Groq, Botpress, CRM automatisé.', "Dashboard KPIs (Power BI) et algorithme d'optimisation pour le courtage santé.", 'Back-end et PostgreSQL pour un projet ministériel (Maurice), modules CNAPS.', "Dashboard MIS’AINA : visualisation de données pour le suivi de projets de développement."] },
     ],
     s3k: 'Stack', s3t: 'Compétences, indexées.',
     stack: [
@@ -224,7 +224,7 @@ export const DICT: Record<Lang, Dict> = {
     about_p2: "Je travaille aujourd'hui avec des équipes françaises, Matsiya et Blackcell via Alvarez & Marsal, qui m'a sélectionnée parmi 90 candidats pour un projet Document AI stratégique. Prochaine étape : m'installer pour rejoindre une équipe sur place, au plus près du produit et de ses utilisateurs.",
     facts: [
       { k: 'Formation', v: 'Ingénieure en informatique', sub: "École Nationale d'Informatique, Univ. de Fianarantsoa · 2018–2023 · GPA 3,2/4" },
-      { k: 'Spécialités', v: 'Machine Learning, Deep Learning, Statistical Learning, modélisation de données, programmation' },
+      { k: 'Spécialités', v: 'Machine Learning, Deep Learning, Statistical Learning, modélisation de données' },
       { k: 'Mobilité', v: 'Ouverte à la mobilité internationale', sub: 'Sponsoring visa requis' },
       { k: 'Clients', v: 'Matsiya · Blackcell (Alvarez & Marsal)' },
       { k: 'Langues', v: 'Français courant · Anglais professionnel' },
@@ -245,7 +245,7 @@ export const EXP_META = [
   { current: false, start: 2026.5, end: 2026.75 },
   { current: false, start: 2024.17, end: 2026.25 },
   { current: false, start: 2023.5, end: 2024.17 },
-  { current: false, start: 2021, end: 2026.75 },
+  { current: false, start: 2021, end: 2024 },
 ]
 
 /* Quality gates, measured in production. Order matches the chart rows. */
